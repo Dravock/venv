@@ -1,5 +1,6 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
+from Settings import world_settings as world_settings
 
 class Voxel(Button):
     def __init__(self, position=(0,0,0)):
@@ -22,11 +23,15 @@ class Voxel(Button):
                 destroy(self)
 
 app = Ursina()
+window.title = "Mincecraft KSS"
+skybox_image = load_texture("./assets/Textures/Sky/sky2.jpg")
+Sky(texture=skybox_image)
 
-for z in range(8):
-    for x in range(8):
+for z in range(128):
+    for x in range(128):
         voxel = Voxel(position=(x,0,z))
         
 player = FirstPersonController()
+camera.clip_plane_far = 48
 
 app.run()
